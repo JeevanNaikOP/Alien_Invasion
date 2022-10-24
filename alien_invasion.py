@@ -23,6 +23,8 @@ class AlienInvasion:
             # checking keyboard and mouse
             self.__check_events()
 
+            self.ship.update()
+
             self._update_screen()
 
             # make the loop run 60 times per second
@@ -34,10 +36,25 @@ class AlienInvasion:
                 if event.type == pygame.QUIT:
                     sys.exit()
             
-                if event.type == pygame.KEYDOWN:
+                elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RIGHT:
                         # move the ship to the right
-                        self.ship.rect.x += 1
+                        self.ship.moving_Right = True
+
+                    if event.key == pygame.k_LEFT:
+                        # move the ship to left
+                        self.ship.moving_Left = True
+
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_RIGHT:
+                        # stop the movement of ship
+                        self.ship.moving_Right = False
+
+                    if event.key == pygame.K_LEFT:
+                        # stop the movement of ship
+                        self.ship.moving_Left = False    
+
+                
 
         def _update_screen(self):
             """ Update screen"""
