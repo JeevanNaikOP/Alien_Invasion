@@ -21,7 +21,7 @@ class AlienInvasion:
         """ Start the main game """
         while True:
             # checking keyboard and mouse
-            self.__check_events()
+            self._check_events()
 
             self.ship.update()
 
@@ -30,41 +30,41 @@ class AlienInvasion:
             # make the loop run 60 times per second
             self.clock.tick(60)
 
-        def _check_event(self):
-            """ Responds to keypress """
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+    def _check_events(self):
+        """ Responds to keypress """
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
             
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RIGHT:
-                        # move the ship to the right
-                        self.ship.moving_Right = True
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    # move the ship to the right
+                    self.ship.moving_Right = True
 
-                    if event.key == pygame.k_LEFT:
-                        # move the ship to left
-                        self.ship.moving_Left = True
+                if event.key == pygame.K_LEFT:
+                    # move the ship to left
+                    self.ship.moving_Left = True
 
-                elif event.type == pygame.KEYUP:
-                    if event.key == pygame.K_RIGHT:
-                        # stop the movement of ship
-                        self.ship.moving_Right = False
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    # stop the movement of ship
+                    self.ship.moving_Right = False
 
-                    if event.key == pygame.K_LEFT:
-                        # stop the movement of ship
-                        self.ship.moving_Left = False    
+                if event.key == pygame.K_LEFT:
+                    # stop the movement of ship
+                    self.ship.moving_Left = False    
 
                 
 
-        def _update_screen(self):
-            """ Update screen"""
-            # fill the background
-            self.screen.fill(self.settings.bg_color)
+    def _update_screen(self):
+        """ Update screen"""
+        # fill the background
+        self.screen.fill(self.settings.bg_color)
 
-            self.ship.blitme()
+        self.ship.blitme()
         
-            # make the most recent drawn on screen visible
-            pygame.display.flip()
+        # make the most recent drawn on screen visible
+        pygame.display.flip()
 
 
 if __name__ == "__main__":
