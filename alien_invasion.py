@@ -52,9 +52,7 @@ class AlienInvasion:
 
                 if event.key == pygame.K_LEFT:
                     # stop the movement of ship
-                    self.ship.moving_Left = False    
-
-                
+                    self.ship.moving_Left = False             
 
     def _update_screen(self):
         """ Update screen"""
