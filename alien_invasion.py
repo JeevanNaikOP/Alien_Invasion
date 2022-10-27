@@ -109,6 +109,8 @@ class AlienInvasion:
     def _create_fleet(self):
         """ Create fleet of alien """
         alien = Alien(self)
+        alien_width = alien.rect.width
+        
         self.aliens.add(alien)
 
 if __name__ == "__main__":
