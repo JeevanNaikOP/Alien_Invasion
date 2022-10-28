@@ -111,7 +111,14 @@ class AlienInvasion:
         alien = Alien(self)
         alien_width = alien.rect.width
         
-        self.aliens.add(alien)
+        current_x = alien_width
+        while current_x < (self.setting.screen_width - 2 * alien_width):
+            new_alien = Alien(self)
+            new_alien.x = current_x
+            new_alien.rect.x = current_x
+
+            self.aliens.add(alien)
+            current_x += 2* alien_width
 
 if __name__ == "__main__":
     ai = AlienInvasion()
