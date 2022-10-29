@@ -32,6 +32,8 @@ class AlienInvasion:
 
             self.ship.update()
 
+            self._update_alien()
+
             self.bullets.update()
 
             self._remove_bullet()
@@ -124,6 +126,10 @@ class AlienInvasion:
 
             # reset current_x to start from left
             current_x = alien_width
+
+    def _update_alien(self):
+        """ update the position of """
+        self.aliens.update()
 
     def _create_alien(self,current_x,current_y):
         """ Create an alien and place it in the row """
