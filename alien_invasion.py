@@ -128,7 +128,8 @@ class AlienInvasion:
             current_x = alien_width
 
     def _update_alien(self):
-        """ update the position of """
+        """ update the position of alien """
+        self._check_fleet_edge()
         self.aliens.update()
 
     def _create_alien(self,current_x,current_y):
@@ -139,6 +140,19 @@ class AlienInvasion:
         new_alien.rect.y = current_y
 
         self.aliens.add(new_alien)
+
+    def _check_fleet_edge(self):
+        """ Check if aliens have reached edge """
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direection()
+                return
+
+    def _change_fleet_direection(self):
+        """ drop the fleet and change direction """
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
 
 if __name__ == "__main__":
     ai = AlienInvasion()
