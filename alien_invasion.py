@@ -38,6 +38,8 @@ class AlienInvasion:
 
             self._remove_bullet()
 
+            self._check_collision()
+            
             self._update_screen()
 
             # make the loop run 60 times per second
@@ -153,6 +155,11 @@ class AlienInvasion:
         for alien in self.aliens.sprites():
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
+
+    def _check_collision(self):
+        """ check for collision of bullet with alien """
+        collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,True,True) 
+
 
 if __name__ == "__main__":
     ai = AlienInvasion()
