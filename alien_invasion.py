@@ -32,10 +32,14 @@ class AlienInvasion:
 
             self.ship.update()
 
+            self._update_alien()
+
             self.bullets.update()
 
             self._remove_bullet()
 
+            self._check_collision()
+            
             self._update_screen()
 
             # make the loop run 60 times per second
@@ -125,6 +129,11 @@ class AlienInvasion:
             # reset current_x to start from left
             current_x = alien_width
 
+    def _update_alien(self):
+        """ update the position of alien """
+        self._check_fleet_edge()
+        self.aliens.update()
+
     def _create_alien(self,current_x,current_y):
         """ Create an alien and place it in the row """
         new_alien = Alien(self)
@@ -133,6 +142,24 @@ class AlienInvasion:
         new_alien.rect.y = current_y
 
         self.aliens.add(new_alien)
+
+    def _check_fleet_edge(self):
+        """ Check if aliens have reached edge """
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direection()
+                return
+
+    def _change_fleet_direection(self):
+        """ drop the fleet and change direction """
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
+
+    def _check_collision(self):
+        """ check for collision of bullet with alien """
+        collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,True,True) 
+
 
 if __name__ == "__main__":
     ai = AlienInvasion()
