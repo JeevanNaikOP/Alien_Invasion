@@ -39,6 +39,8 @@ class AlienInvasion:
             self._remove_bullet()
 
             self._check_collision()
+
+            self._add_fleet()
             
             self._update_screen()
 
@@ -159,6 +161,12 @@ class AlienInvasion:
     def _check_collision(self):
         """ check for collision of bullet with alien """
         collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,True,True) 
+
+    def _add_fleet(self):
+        if not self.aliens:
+            """ Destroy existing bullet reate new fleet """
+            self.bullets.empty()
+            self._create_fleet()
 
 
 if __name__ == "__main__":
