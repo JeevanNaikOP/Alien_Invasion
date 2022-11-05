@@ -159,8 +159,13 @@ class AlienInvasion:
         self.settings.fleet_direction *= -1
 
     def _check_collision(self):
-        """ check for collision of bullet with alien """
+        """ check for collision of bullet with alien or alien with ship """
+        # remove alien if bullet collides with ship
         collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,True,True) 
+
+        # if alien collides with ship
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print("Ship hit")
 
     def _add_fleet(self):
         """ Destroy existing bullet reate new fleet """
