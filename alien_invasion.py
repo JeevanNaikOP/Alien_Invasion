@@ -5,6 +5,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
+from time import sleep
 
 class AlienInvasion:
     def __init__(self):
@@ -169,7 +170,7 @@ class AlienInvasion:
 
         # if alien collides with ship
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            self.ship_left()
+            self._ship_hit()
 
     def _add_fleet(self):
         """ Destroy existing bullet reate new fleet """
@@ -181,6 +182,16 @@ class AlienInvasion:
         """ Respond to the ship hit by alien """
         # Decrement ship left
         self.stats.ships_left =- 1
+
+        # Get rid of aliens and bullets
+        self.bullets.empty()
+        self.aliens.empty()
+
+        # create new fleet
+        self._create_fleet()
+
+        # Pause
+        sleep(0.5)
 
 
 if __name__ == "__main__":
