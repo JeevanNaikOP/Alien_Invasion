@@ -29,6 +29,9 @@ class AlienInvasion:
         # create an instance to store game
         self.stats = GameStats(self)
 
+        # Start Alien Invasion in active state
+        self.game_active = True
+
     def run_game(self):
         """ Start the main game """
         while True:
@@ -180,7 +183,7 @@ class AlienInvasion:
         for alien in self.aliens.sprites():
             if alien.rect.bottom >= self.settings.screen_height:
                 self._ship_hit()
-
+                break
 
     def _add_fleet(self):
         """ Destroy existing bullet reate new fleet """
