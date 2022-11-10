@@ -38,17 +38,19 @@ class AlienInvasion:
             # checking keyboard and mouse
             self._check_events()
 
-            self.ship.update()
+            if self.game_active:
 
-            self._update_alien()
+                self.ship.update()
 
-            self.bullets.update()
+                self._update_alien()
 
-            self._remove_bullet()
+                self.bullets.update()
 
-            self._check_collision()
+                self._remove_bullet()
 
-            self._add_fleet()
+                self._check_collision()
+
+                self._add_fleet()
             
             self._update_screen()
 
@@ -193,18 +195,22 @@ class AlienInvasion:
 
     def _ship_hit(self):
         """ Respond to the ship hit by alien """
-        # Decrement ship left
-        self.stats.ships_left =- 1
+        if self.stats.ships_left > 0:
+            # Decrement ship left
+            self.stats.ships_left =- 1
 
-        # Get rid of aliens and bullets
-        self.bullets.empty()
-        self.aliens.empty()
+            # Get rid of aliens and bullets
+            self.bullets.empty()
+            self.aliens.empty()
 
-        # create new fleet
-        self._create_fleet()
+            # create new fleet
+            self._create_fleet()
 
-        # Pause
-        sleep(0.5)
+            # Pause
+            sleep(0.5)
+        
+        else:
+            self.game_active = False
 
 
 if __name__ == "__main__":
