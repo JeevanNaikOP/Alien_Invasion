@@ -6,6 +6,7 @@ from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
 from time import sleep
+from button import Button
 
 class AlienInvasion:
     def __init__(self):
@@ -29,8 +30,11 @@ class AlienInvasion:
         # create an instance to store game
         self.stats = GameStats(self)
 
-        # Start Alien Invasion in active state
-        self.game_active = True
+        # Start Alien Invasion in inactive state
+        self.game_active = False
+
+        # make the play button
+        self.play_button = Button(self,"Play")
 
     def run_game(self):
         """ Start the main game """
@@ -119,6 +123,10 @@ class AlienInvasion:
 
         self.ship.blitme()
         
+        # draw the play button if game is inactive
+        if not self.game_active:
+            self.play_button.draw_button()
+
         # make the most recent drawn on screen visible
         pygame.display.flip()
 
