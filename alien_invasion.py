@@ -72,6 +72,10 @@ class AlienInvasion:
 
             elif event.type == pygame.KEYUP:
                 self._check_events_KEYUP(event)
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
                 
 
     def _check_events_KEYDOWN(self,event):
@@ -219,6 +223,11 @@ class AlienInvasion:
         
         else:
             self.game_active = False
+
+    def _check_play_button(self,mouse_pos):
+        """ Start game when mouse clicks play button """
+        if self.play_button.rect.collidepoint(mouse_pos):
+            self.game_active = True
 
 
 if __name__ == "__main__":
