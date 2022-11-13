@@ -207,7 +207,7 @@ class AlienInvasion:
 
     def _ship_hit(self):
         """ Respond to the ship hit by alien """
-        if self.stats.ships_left > 0:
+        if self.stats.ships_left >= 0:
             # Decrement ship left
             self.stats.ships_left =- 1
 
@@ -227,8 +227,17 @@ class AlienInvasion:
     def _check_play_button(self,mouse_pos):
         """ Start game when mouse clicks play button """
         if self.play_button.rect.collidepoint(mouse_pos):
+            # Reset game statistics
+            self.stats.reset_stats()
             self.game_active = True
 
+            # Empty bullets and aliens
+            self.bullets.empty()
+            self.aliens.empty()
+
+            # create alien fleet and center ship
+            self._create_fleet()
+            self.ship.center_ship()
 
 if __name__ == "__main__":
     ai = AlienInvasion()

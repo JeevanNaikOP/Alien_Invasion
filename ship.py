@@ -38,3 +38,7 @@ class Ship:
 
         # update movement object of ship
         self.rect.x = self.x
+
+    def center_ship(self):
+        """ Center ship when called """
+        self.rect.midbottom = self.screen_rect.midbottom
