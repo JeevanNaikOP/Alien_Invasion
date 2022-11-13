@@ -223,6 +223,7 @@ class AlienInvasion:
         
         else:
             self.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_play_button(self,mouse_pos):
         """ Start game when mouse clicks play button """
@@ -240,7 +241,7 @@ class AlienInvasion:
             self.ship.center_ship()
 
             # hide mouse cursor
-            pygame.mouse.set_visible(false)
+            pygame.mouse.set_visible(False)
 
 if __name__ == "__main__":
     ai = AlienInvasion()
