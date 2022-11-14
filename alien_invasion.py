@@ -200,10 +200,11 @@ class AlienInvasion:
                 break
 
     def _add_fleet(self):
-        """ Destroy existing bullet reate new fleet """
+        """ Destroy existing bullet create new fleet """
         if not self.aliens:
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _ship_hit(self):
         """ Respond to the ship hit by alien """
