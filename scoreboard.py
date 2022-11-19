@@ -17,7 +17,7 @@ class Scoreboard:
         # score image
         self._prep_msg()
 
-    def _prep_msg(self,msg):
+    def _prep_msg(self):
         """ Turn score into rendered image  """
         score_val = str(self.stats.score)
 
@@ -27,3 +27,7 @@ class Scoreboard:
         self.score_img_rect = self.score_img.get_rect()
         self.score_img_rect.right = self.screen_rect.right - 20
         self.score_img_rect.top = 20
+
+    def show_score(self):
+        """ Display score on the screen """
+        self.screen.blit(self.score_img,self.score_img_rect)

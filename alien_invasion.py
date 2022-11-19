@@ -7,6 +7,7 @@ from alien import Alien
 from game_stats import GameStats
 from time import sleep
 from button import Button
+from scoreboard import Scoreboard
 
 class AlienInvasion:
     def __init__(self):
@@ -35,6 +36,9 @@ class AlienInvasion:
 
         # make the play button
         self.play_button = Button(self,"Play")
+
+        # Scoreboard instance
+        self.sb = Scoreboard(self)
 
     def run_game(self):
         """ Start the main game """
@@ -119,6 +123,8 @@ class AlienInvasion:
         """ Update screen"""
         # fill the background
         self.screen.fill(self.settings.bg_color)
+
+        self.sb.show_score()
 
         self.aliens.draw(self.screen)
 
