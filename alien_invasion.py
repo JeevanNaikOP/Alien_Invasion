@@ -242,6 +242,10 @@ class AlienInvasion:
             # Reset game statistics
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
+
+            # reset score
+            self.sb._prep_msg()
+            
             self.game_active = True
 
             # Empty bullets and aliens
