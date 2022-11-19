@@ -189,7 +189,11 @@ class AlienInvasion:
     def _check_collision(self):
         """ check for collision of bullet with alien or alien with ship """
         # remove alien if bullet collides with ship
-        collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,True,True) 
+        collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,True,True)
+
+        if collisions:
+            self.stats.score += self.settings.alien_points
+            self.sb._prep_msg()
 
         # if alien collides with ship
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
