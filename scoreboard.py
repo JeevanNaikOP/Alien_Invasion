@@ -17,6 +17,9 @@ class Scoreboard:
         # score image
         self._prep_msg()
 
+        # score high score
+        self.prep_high_score()
+
     def _prep_msg(self):
         """ Turn score into rendered image  """
         rounded_score = round(self.stats.score,-1)
@@ -33,3 +36,19 @@ class Scoreboard:
     def show_score(self):
         """ Display score on the screen """
         self.screen.blit(self.score_img,self.score_img_rect)
+        self.screen.blit(self.high_score_img,self.high_score_img_rect)
+
+    def prep_high_score(self):
+        """ Turn the highscore into rendered image """
+        high_score = round(self.stats.score,-1)
+
+        high_score_val = f"{high_score:,}"
+
+        self.high_score_img = self.font.render(high_score_val,True,self.text_color,self.settings.bg_color)
+        
+        # Display imag at top right of the screen
+        self.high_score_img_rect = self.high_score_img.get_rect()
+        self.high_score_img_rect.right = self.screen_rect.centerx
+        self.high_score_img_rect.top = 20
+
+
