@@ -196,6 +196,7 @@ class AlienInvasion:
             for collision in collisions.values():
                 self.stats.score += self.settings.alien_points * len(collision)
             self.sb._prep_msg()
+            self.sb.check_highscore()
 
         # if alien collides with ship
         if pygame.sprite.spritecollideany(self.ship, self.aliens):

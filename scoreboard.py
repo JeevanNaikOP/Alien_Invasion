@@ -51,4 +51,8 @@ class Scoreboard:
         self.high_score_img_rect.right = self.screen_rect.centerx
         self.high_score_img_rect.top = 20
 
-
+    def check_highscore(self):
+        """ Check to see if there is new highscore """
+        if self.stats.score > self.stats.high_score:
+            self.stats.high_score = self.stats.score
+            self.prep_high_score()
