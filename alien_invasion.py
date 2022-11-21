@@ -219,6 +219,10 @@ class AlienInvasion:
             self._create_fleet()
             self.settings.increase_speed()
 
+            # increase level
+            self.stats.level += 1
+            self.sb.prep_level()
+
     def _ship_hit(self):
         """ Respond to the ship hit by alien """
         if self.stats.ships_left >= 0:
@@ -248,6 +252,8 @@ class AlienInvasion:
 
             # reset score
             self.sb._prep_msg()
+
+            self.sb.prep_level()
 
             self.game_active = True
 
