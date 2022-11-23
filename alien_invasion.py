@@ -255,6 +255,8 @@ class AlienInvasion:
 
             self.sb.prep_level()
 
+            self.sb.prep_ships()
+
             self.game_active = True
 
             # Empty bullets and aliens
