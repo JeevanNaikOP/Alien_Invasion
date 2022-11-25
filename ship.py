@@ -1,11 +1,13 @@
 import pygame
 from settings import Settings
+from pygame.sprite import Sprite
 
-class Ship:
+class Ship(Sprite):
     """ Class to manage the ship """
 
     def __init__(self,ai_game) -> None:
         """ Initialize the ship """
+        super().__init__()
         self.screen = ai_game.screen
         self.screen_rect = ai_game.screen.get_rect()
         self.settings = ai_game.settings
@@ -38,3 +40,7 @@ class Ship:
 
         # update movement object of ship
         self.rect.x = self.x
+
+    def center_ship(self):
+        """ Center ship when called """
+        self.rect.midbottom = self.screen_rect.midbottom
