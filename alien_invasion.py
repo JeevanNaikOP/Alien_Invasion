@@ -7,6 +7,7 @@ from alien import Alien
 from game_stats import GameStats
 from time import sleep
 from button import Button
+from scoreboard import Scoreboard
 
 class AlienInvasion:
     def __init__(self):
@@ -35,6 +36,9 @@ class AlienInvasion:
 
         # make the play button
         self.play_button = Button(self,"Play")
+
+        # Scoreboard instance
+        self.sb = Scoreboard(self)
 
     def run_game(self):
         """ Start the main game """
@@ -120,6 +124,8 @@ class AlienInvasion:
         # fill the background
         self.screen.fill(self.settings.bg_color)
 
+        self.sb.show_score()
+
         self.aliens.draw(self.screen)
 
         for bullet in self.bullets.sprites():
@@ -183,7 +189,14 @@ class AlienInvasion:
     def _check_collision(self):
         """ check for collision of bullet with alien or alien with ship """
         # remove alien if bullet collides with ship
-        collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,True,True) 
+        collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,True,True)
+
+        if collisions:
+            # number of alien collided
+            for collision in collisions.values():
+                self.stats.score += self.settings.alien_points * len(collision)
+            self.sb._prep_msg()
+            self.sb.check_highscore()
 
         # if alien collides with ship
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
@@ -206,11 +219,17 @@ class AlienInvasion:
             self._create_fleet()
             self.settings.increase_speed()
 
+            # increase level
+            self.stats.level += 1
+            self.sb.prep_level()
+
     def _ship_hit(self):
         """ Respond to the ship hit by alien """
         if self.stats.ships_left >= 0:
             # Decrement ship left
             self.stats.ships_left =- 1
+
+            self.sb.prep_ships()
 
             # Get rid of aliens and bullets
             self.bullets.empty()
@@ -232,6 +251,14 @@ class AlienInvasion:
             # Reset game statistics
             self.settings.initialize_dynamic_settings()
             self.stats.reset_stats()
+
+            # reset score
+            self.sb._prep_msg()
+
+            self.sb.prep_level()
+
+            self.sb.prep_ships()
+
             self.game_active = True
 
             # Empty bullets and aliens
